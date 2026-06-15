@@ -1,17 +1,15 @@
-# Intermediate Axis Theorem — Simulation
+# 중간축 정리 — 시뮬레이션
 
-A numerical simulation of the **intermediate axis theorem** (a.k.a. the
-*tennis-racquet effect* or *Dzhanibekov effect*), reproducing the physics and
-key results of:
+**중간축 정리**(일명 *테니스 라켓 효과* 또는 *Dzhanibekov 효과*)의 수치
+시뮬레이션입니다. 아래 논문의 물리와 핵심 결과를 재현합니다.
 
 > Bubbar, F. & Zhu, L. (2025). *The Intermediate Axis Theorem: A Model for the
 > Period and a Phenomenal Explanation.* Science One Programme, UBC.
-> (Paper materials: https://github.com/fbubbar/sci1-t2)
+> (논문 자료: https://github.com/fbubbar/sci1-t2)
 
-When a rigid body with three distinct principal moments of inertia
-(I₁ > I₂ > I₃) is spun about its **intermediate** axis, the motion is unstable
-and the body periodically flips. Spinning about the largest or smallest axis is
-stable. The simulation integrates the **torque-free Euler rotation equations**
+세 주관성모멘트가 모두 다른 강체(I₁ > I₂ > I₃)를 **중간 축**으로 돌리면 운동이
+불안정해져 물체가 주기적으로 뒤집힙니다. 가장 큰 축이나 가장 작은 축으로
+돌리면 안정적입니다. 시뮬레이션은 **토크 없는 오일러 회전방정식**을 적분합니다.
 
 ```
 I₁ ω̇₁ = (I₂ − I₃) ω₂ ω₃
@@ -19,54 +17,64 @@ I₂ ω̇₂ = (I₃ − I₁) ω₃ ω₁
 I₃ ω̇₃ = (I₁ − I₂) ω₁ ω₂
 ```
 
-with a 4th-order Runge–Kutta scheme, alongside an orientation quaternion so the
-body can be drawn in 3D. Energy and |L| are conserved to ~machine precision,
-which validates the integrator.
+적분은 **4차 룽게–쿠타(RK4)** 방식으로 하며, 물체를 3D로 그릴 수 있도록 방향
+쿼터니언도 함께 적분합니다. 에너지와 |L|이 거의 기계 정밀도로 보존되어
+적분기의 정확성이 검증됩니다.
 
-## What's here
+## 구성 파일
 
-| File | What it produces |
-|------|------------------|
-| `physics.py` | Core RK4 integrator (ω + orientation quaternion), conserved quantities. Run it for a conservation self-test. |
-| `fig_omega_graphs.py` | ω(t) time series of the flip (paper Fig. 5 style) + a 3-panel **stable/unstable comparison** of the three axes (added for teaching; not a specific paper figure). |
-| `fig_polhode.py` | The **sphere ∩ ellipsoid** state-space construction and the polhode curves (paper Figs. 1–3). |
-| `fig_period_model.py` | **Precession period vs. initial speed**, fitting the inverse model `T = a/(ω₀+b)+c` to simulated data (paper Fig. 12; the paper's own racquet fit was a=11.85, b=2.30, c=0.047, χ²=1.58). |
-| `animate_racquet.py` | A 3D GIF of the racquet **flipping** about the intermediate axis, with the conserved L vector. |
-| `run_all.py` | Generates every figure and the animation. |
+| 파일 | 생성/역할 |
+|------|-----------|
+| `physics.py` | 핵심 RK4 적분기(ω + 방향 쿼터니언)와 보존량. 직접 실행하면 보존량 자체 검증을 수행합니다. |
+| `fig_omega_graphs.py` | 뒤집힘의 ω(t) 시계열(논문 Fig. 5 스타일) + 세 축 **안정/불안정 비교** 3패널(교육용 추가 그림이며 논문의 특정 그림은 아님). |
+| `fig_polhode.py` | **구 ∩ 타원체** 상태공간 구성과 폴호드 곡선(논문 Figs. 1–3). |
+| `fig_period_model.py` | **세차 주기 vs 초기 각속도**. 역모델 `T = a/(ω₀+b)+c`를 시뮬레이션 데이터에 피팅(논문 Fig. 12; 논문의 라켓 실측 피팅값은 a=11.85, b=2.30, c=0.047, χ²=1.58). |
+| `animate_racquet.py` | 라켓이 중간축으로 **뒤집히는** 3D GIF. 보존되는 L 벡터도 함께 표시. |
+| `run_all.py` | 모든 그림과 애니메이션을 한 번에 생성. |
 
-The companion **interactive web version** lives in `../web/index.html`
-(open it in any browser — sliders for I₁, I₂, I₃ and the initial conditions,
-live 3D body, the sphere/ellipsoid state space, and a scrolling ω(t) plot).
+함께 제공되는 **인터랙티브 웹 버전**은 `../web/index.html`에 있습니다(아무
+브라우저로나 열면 됨 — I₁, I₂, I₃와 초기조건 슬라이더, 실시간 3D 본체,
+구/타원체 상태공간, 스크롤되는 ω(t) 그래프).
 
-## Run it
+## 실행 방법
+
+먼저 필요한 패키지를 설치합니다(처음 한 번만).
 
 ```bash
 cd simulation
 pip install -r requirements.txt
-python run_all.py          # everything -> figures/
-# or individually:
-python physics.py          # integrator conservation self-test
-python fig_omega_graphs.py
-python fig_polhode.py
-python fig_period_model.py
-python animate_racquet.py
 ```
 
-Outputs are written to `simulation/figures/`.
+그다음 전체를 한 번에 생성하거나, 원하는 스크립트만 개별 실행합니다.
 
-## Reproduced results
+```bash
+python run_all.py          # 전부 생성 -> figures/
 
-- **Unstable flip about r₂ only.** ω₂ periodically reverses sign while ω₁ and ω₃
-  spike during each flip; rotation about r₁ and r₃ stays steady.
-- **State-space geometry.** The motion follows the intersection of the |L|
-  sphere and the energy ellipsoid; about the intermediate axis this curve wraps
-  the whole sphere (the source of the instability).
-- **Period ∝ 1/ω₀.** The flip period follows the inverse relation the paper
-  fitted to racquet data, here recovered directly from the simulation.
+# 또는 개별 실행:
+python physics.py          # 적분기 보존량 자체 검증
+python fig_omega_graphs.py # ω(t) 시계열 + 세 축 비교
+python fig_polhode.py      # 구∩타원체 상태공간
+python fig_period_model.py # 주기 vs 초기 각속도
+python animate_racquet.py  # 3D 뒤집힘 GIF
+```
+
+> **Windows PowerShell**에서는 `python3` 대신 `python`을 쓰고, 위 명령을 한 줄씩
+> 실행하면 됩니다. 결과 파일은 모두 `simulation/figures/` 에 저장됩니다.
+
+생성물은 `simulation/figures/` 폴더에 기록됩니다.
+
+## 재현된 결과
+
+- **r₂(중간축)에서만 불안정 뒤집힘.** 뒤집힐 때마다 ω₂는 주기적으로 부호가
+  바뀌고 ω₁·ω₃는 순간적으로 치솟습니다. r₁·r₃로 돌리면 안정적으로 유지됩니다.
+- **상태공간 기하.** 운동은 |L| 구와 에너지 타원체의 교선을 따릅니다. 중간축의
+  경우 이 곡선이 구 전체를 감싸며, 이것이 불안정성의 근원입니다.
+- **주기 ∝ 1/ω₀.** 뒤집힘 주기는 논문이 라켓 데이터에 피팅한 반비례 관계를
+  따르며, 여기서는 시뮬레이션에서 직접 재현됩니다.
 
 ---
 
-## 한국어 설명 — 어떤 값을 쓰는가
+## 어떤 값을 쓰는가 (참고)
 
 **이론(물리 법칙)은 웹과 파이썬이 동일합니다.** 두 버전 모두 토크 없는
 오일러 회전방정식을 같은 방식으로 풀며, 바뀌는 것은 "어떤 물체(관성모멘트)를
