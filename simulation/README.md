@@ -6,6 +6,7 @@ key results of:
 
 > Bubbar, F. & Zhu, L. (2025). *The Intermediate Axis Theorem: A Model for the
 > Period and a Phenomenal Explanation.* Science One Programme, UBC.
+> (Paper materials: https://github.com/fbubbar/sci1-t2)
 
 When a rigid body with three distinct principal moments of inertia
 (I₁ > I₂ > I₃) is spun about its **intermediate** axis, the motion is unstable
@@ -27,9 +28,9 @@ which validates the integrator.
 | File | What it produces |
 |------|------------------|
 | `physics.py` | Core RK4 integrator (ω + orientation quaternion), conserved quantities. Run it for a conservation self-test. |
-| `fig_omega_graphs.py` | ω(t) time series of the flip + a 3-panel **stable/unstable comparison** of the three axes (paper Figs. 5–7). |
+| `fig_omega_graphs.py` | ω(t) time series of the flip (paper Fig. 5 style) + a 3-panel **stable/unstable comparison** of the three axes (added for teaching; not a specific paper figure). |
 | `fig_polhode.py` | The **sphere ∩ ellipsoid** state-space construction and the polhode curves (paper Figs. 1–3). |
-| `fig_period_model.py` | **Precession period vs. initial speed**, fitting the inverse model `T = a/(ω₀+b)+c` to simulated data (paper Fig. 12). |
+| `fig_period_model.py` | **Precession period vs. initial speed**, fitting the inverse model `T = a/(ω₀+b)+c` to simulated data (paper Fig. 12; the paper's own racquet fit was a=11.85, b=2.30, c=0.047, χ²=1.58). |
 | `animate_racquet.py` | A 3D GIF of the racquet **flipping** about the intermediate axis, with the conserved L vector. |
 | `run_all.py` | Generates every figure and the animation. |
 

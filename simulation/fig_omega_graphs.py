@@ -1,10 +1,15 @@
 """Angular-velocity time series and three-axis stability comparison.
 
-Reproduces the style of Figures 5-7 in Bubbar & Zhu (2025): the components of
-the body-frame angular velocity over time.  Rotation started near the
-intermediate axis shows the characteristic periodic flipping (omega_2 holds
-roughly steady while omega_1 and omega_3 spike and reverse sign), whereas
-rotation about the largest or smallest axis stays steady.
+The first figure plots the body-frame angular-velocity components over time, in
+the style of the omega-t gyroscope data in Bubbar & Zhu (2025) (their Fig. 5;
+the periodic sign reversal of the off-axis components is the "reversed axes"
+behaviour they note around Fig. 7).  Rotation started near the intermediate
+axis shows the characteristic periodic flipping: omega_2 holds roughly steady
+while omega_1 and omega_3 spike and reverse sign.
+
+The second figure is an additional pedagogical comparison (not a specific paper
+figure) contrasting rotation started about each of the three principal axes --
+only the intermediate axis is unstable.
 """
 
 from __future__ import annotations
@@ -16,7 +21,7 @@ from physics import simulate, TEXTBOOK_INERTIA
 
 
 def omega_time_series(I=TEXTBOOK_INERTIA, outfile="figures/omega_intermediate.png"):
-    """Unstable flipping when spun about the intermediate axis (Fig. 5/6 style)."""
+    """Unstable flipping when spun about the intermediate axis (Fig. 5 style)."""
     w0 = [0.08, 6.0, 0.0]  # mostly about r2 with a tiny perturbation
     res = simulate(I, w0, t_max=12.0, dt=0.001)
     t, w = res["t"], res["w"]

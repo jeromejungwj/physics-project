@@ -6,10 +6,13 @@ The paper fit a three-parameter inverse model
 
     T(w0) = a / (w0 + b) + c
 
-to filtered tennis-racquet data (chi^2 = 1.58).  Here we instead generate the
-"data" from the numerical Euler simulation itself: for a range of initial
-speeds about (mostly) the intermediate axis we measure the flip period from the
-omega_2 zero crossings, then fit the same inverse model.
+to 63 filtered tennis-racquet trials, with best-fit parameters a = 11.85,
+b = 2.30 s^-1, c = 0.047 s and a good fit of chi^2 = 1.58.  Here we instead
+generate the "data" from the numerical Euler simulation itself: for a range of
+initial speeds about (mostly) the intermediate axis we measure the flip period
+from the omega_2 zero crossings, then fit the same inverse model.  Our fitted
+a, b, c therefore differ from the paper's empirical values -- they come from the
+synthetic simulation, not the racquet data -- but the same inverse form holds.
 """
 
 from __future__ import annotations
@@ -25,8 +28,10 @@ from physics import simulate, TEXTBOOK_INERTIA
 def measure_period(t, w2):
     """Estimate the flip period from the omega_2 series.
 
-    Per the paper (Fig. 4): the distance between successive zero crossings of
-    omega_2 is a half period; we average over all crossings.  Returns NaN if
+    Successive zero crossings of omega_2 are half a precession period apart, so
+    we average the zero-to-zero gaps and double them.  (The paper instead labels
+    both zeros and local extrema in Fig. 4, where adjacent labelled points are a
+    quarter period apart; using zeros alone is sufficient here.)  Returns NaN if
     too few crossings are found.
     """
     sign = np.sign(w2)

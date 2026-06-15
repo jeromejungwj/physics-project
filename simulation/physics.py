@@ -28,13 +28,16 @@ from __future__ import annotations
 import numpy as np
 
 
-# --- Measured moments of inertia from the paper (Table 2, g.m^2) -------------
-# 27" tennis racquet + iPhone 12 mounted at the centre of the strings.
-#   I1 (primary, r1)      = 78.0 g.m^2   (largest  -> stable)
-#   I2 (intermediate, r2) ~ 78.0 g.m^2   (middle   -> UNSTABLE)
-#   I3 (tertiary, r3)     = 1.391 g.m^2  (smallest -> stable)
-# The paper notes I1 and I2 were very similar; the racquet still flipped.
-RACQUET_INERTIA = (78.0e-3, 60.0e-3, 1.391e-3)  # kg.m^2 (I2 nudged for clarity)
+# --- Measured moments of inertia from the paper (Table 2) --------------------
+# 27" tennis racquet + iPhone 12 zip-tied to the centre of the strings.
+#   I1 (primary, r1)      = 78.0  g.m^2  (largest)
+#   I2 (intermediate, r2) = 78.0  g.m^2  (middle -> the unstable axis)
+#   I3 (tertiary, r3)     = 1.391 g.m^2  (smallest)
+# The paper measured I1 and I2 as nearly equal (within uncertainty), yet the
+# racquet still flipped -- they were "sufficiently different" to act as an
+# asymmetric top.  Because I1 ~ I2 the flip is very slow, so the figures use the
+# well-separated TEXTBOOK_INERTIA preset for a clear, fast Dzhanibekov flip.
+RACQUET_INERTIA = (78.0e-3, 78.0e-3, 1.391e-3)  # kg.m^2 (paper Table 2)
 
 # A textbook "T-handle"/box preset with well separated moments for a clean,
 # obvious Dzhanibekov flip.
