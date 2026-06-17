@@ -2,15 +2,18 @@
 
 수행평가
 
-## 📂 시뮬레이션 코드 위치
+## Intermediate Axis Theorem 시뮬레이션
 
-이 `main` 브랜치에는 보고서(`report.tex`, `report.pdf`)만 있습니다.
-**시뮬레이션 코드(Python + 웹)는 `claude/beautiful-meitner-agw4yp` 브랜치**에
-들어 있습니다.
+비대칭 강체를 중간축으로 돌리면 불안정하게 뒤집히는 **중간축 정리(테니스 라켓
+효과 / Dzhanibekov 효과)** 시뮬레이션입니다. Bubbar & Zhu (2025) 논문의 원리와
+주요 결과를 재현합니다.
 
-- 시뮬레이션 폴더: [claude/beautiful-meitner-agw4yp 브랜치 보기](https://github.com/jeromejungwj/physics-project/tree/claude/beautiful-meitner-agw4yp)
-- 자세한 설명(실행법·값 설명): [simulation/README.md 보기](https://github.com/jeromejungwj/physics-project/blob/claude/beautiful-meitner-agw4yp/simulation/README.md)
+- **Python** (`simulation/`): 토크 없는 오일러 회전방정식을 RK4로 적분 →
+  ω-t 그래프, 세 축 안정/불안정 비교, 구-타원체 상태공간(polhode), 세차 주기
+  반비례 모델, 3D 뒤집힘 애니메이션. 실행법은 [`simulation/README.md`](simulation/README.md).
+- **웹 인터랙티브** (`web/index.html`): 브라우저에서 바로 여는 Three.js 시뮬레이션.
+  I₁·I₂·I₃와 초기조건 슬라이더, 실시간 3D 본체, 구-타원체 상태공간, ω(t) 그래프.
 
-> 주제: **중간축 정리(테니스 라켓 / Dzhanibekov 효과)** — 비대칭 강체를 중간축으로
-> 돌리면 불안정하게 뒤집히는 현상의 수치 시뮬레이션. Bubbar & Zhu (2025) 논문의
-> 원리와 결과를 재현합니다.
+```bash
+cd simulation && pip install -r requirements.txt && python run_all.py
+```
