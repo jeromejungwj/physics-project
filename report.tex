@@ -95,7 +95,11 @@ solver: the simulation reproduces the flip, conserves energy and $|\mathbf{L}|$
 to near machine precision ($\sim 10^{-13}$ relative drift), traces the
 sphere--ellipsoid \emph{polhode} geometry, and recovers the inverse
 period--speed scaling law $T = a/(\omega_0+b)+c$ reported in
-\cite{bubbar2025}.
+\cite{bubbar2025}. Finally, we recorded real three-axis gyroscope data from a
+tossed smartphone (phyphox, $100~\mathrm{Hz}$) and observed the flip directly:
+during free flight $|\boldsymbol{\omega}|$ stays nearly constant while the
+dominant body-axis component reverses sign with a period of
+$\approx 0.88~\mathrm{s}$.
 \end{abstract}
 \tableofcontents
 \newpage
@@ -423,6 +427,71 @@ least-squares fit of $T=a/(\omega_0+b)+c$; residuals shown below.}
 \end{figure}
 
 % =========================================================================
+\section{Real Experiment: Gyroscope Measurement of a Tossed Smartphone}
+\label{sec:experiment}
+% =========================================================================
+To test the theory against the physical world we recorded the rotation of a
+smartphone (Apple iPhone, model \texttt{iPhone14,4}) tossed into the air. The
+phone's built-in MEMS gyroscope logged the three body-frame angular-velocity
+components $(\omega_x,\omega_y,\omega_z)$ at $100~\mathrm{Hz}$ using the
+\emph{phyphox} app~\cite{phyphox}, for a total of about $7~\mathrm{s}$. A flat
+phone is an excellent asymmetric top: its three principal moments of inertia are
+well separated, and the long in-plane axis serves as the \emph{intermediate}
+axis.
+
+\subsection{Isolating the Free-Flight Segment}
+Figure~\ref{fig:experiment} (top) shows the full recording. The motion separates
+cleanly into three phases: handling (small, irregular $\boldsymbol{\omega}$), a
+single airborne toss, and the catch---the sharp $|\boldsymbol{\omega}|$ spike to
+$\sim 39~\mathrm{rad/s}$ at $t\approx 3.5~\mathrm{s}$, an impulsive external
+torque. We therefore restrict the analysis to the airborne window
+$t \in [2.70,\,3.40]~\mathrm{s}$, during which the phone is in free fall and
+hence rotates torque-free apart from small aerodynamic drag.
+
+\subsection{Results: the Flip and Approximate Conservation}
+Within the free-flight window the magnitude of the angular velocity is nearly
+constant,
+\begin{equation}
+|\boldsymbol{\omega}| = 18.3 \pm 2.1~\mathrm{rad/s}
+\quad (\approx 11\%\ \text{variation}),
+\end{equation}
+consistent with torque-free rotation; the modest drift is attributable to air
+drag and the finite measurement window. The dominant component is $\omega_x$,
+the phone's intermediate axis. As Figure~\ref{fig:experiment} (bottom) shows, it
+\emph{reverses sign} from $+17$ to $-17~\mathrm{rad/s}$ while $\omega_y$ and
+$\omega_z$ swing through their extrema---precisely the tennis-racquet signature
+derived in Section~\ref{sec:derivations} and simulated in
+Figure~\ref{fig:omega}. Reading the flip period from the two interpolated zero
+crossings of $\omega_x$ (at $t = 2.95$ and $3.39~\mathrm{s}$) yields a half
+period of $0.44~\mathrm{s}$, i.e.
+\begin{equation}
+T_{\text{flip}} \approx 0.88~\mathrm{s} \quad (1.1~\mathrm{Hz}).
+\end{equation}
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.92\linewidth]{figures/experiment_gyro.png}
+\caption{Measured gyroscope data. \textbf{Top:} the full $7~\mathrm{s}$
+recording with the free-flight window shaded; the spike at
+$t\approx 3.5~\mathrm{s}$ is the catch. \textbf{Bottom:} zoom of the free
+flight---$\omega_x$ reverses sign (red dotted zero crossings,
+$T\approx 0.88~\mathrm{s}$) while $|\boldsymbol{\omega}|$ stays nearly constant.}
+\label{fig:experiment}
+\end{figure}
+
+\begin{physicsinsight}
+\textbf{Theory meets measurement.} The experiment confirms all three qualitative
+predictions with nothing more than a phone and a free app: (i)
+$|\boldsymbol{\omega}|$ is conserved to $\sim 10\%$ during free flight, (ii) the
+intermediate-axis component flips sign while the perpendicular components surge,
+and (iii) the motion is periodic. The chief departures from the idealized model
+are the slow drag-induced decay of $|\boldsymbol{\omega}|$ (compare the
+$-0.048~\mathrm{N\,m}$ mean torque measured by \cite{bubbar2025}) and the small
+number of flip cycles captured in one short toss, which makes $T_{\text{flip}}$ an
+estimate rather than a precise fit.
+\end{physicsinsight}
+
+% =========================================================================
 \section{Critical Analysis and Commentary}
 % =========================================================================
 \begin{itemize}
@@ -491,5 +560,9 @@ Parker, M., \& Hunt, H. (2020).
 \bibitem{muller2019}
 Muller, D. (2019).
 ``The Bizarre Behavior of Rotating Bodies.'' \textit{Veritasium} (online video).
+\bibitem{phyphox}
+Staacks, S., H\"utz, S., Heinke, H., \& Stampfer, C. (2018).
+``Advanced tools for smartphone-based experiments: phyphox.''
+\textit{Physics Education}, \textbf{53}(4), 045009.
 \end{thebibliography}
 \end{document}
