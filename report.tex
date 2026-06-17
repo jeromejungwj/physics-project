@@ -63,15 +63,14 @@ Asymmetric Rigid Body} \\
 % Multi-column author format for a group project
 \author{
 \begin{tabular}{r @{\quad} l}
-\textbf{Project Group:} & [e.g., Group 4 / Team Dzhanibekov] \\[1ex]
-\textbf{Group Members:} & Student Name 1
-(\textit{Derivations \& Mathematical Layout}) \\
-& Student Name 2 (\textit{Computational Modeling \& Plots}) \\
-& Student Name 3 (\textit{Literature Review \&
-Commentary}) \\[1ex]
+\textbf{Project Group:} & [Group 11 / Team Fat&Met] \\[1ex]
+\textbf{Group Members:} & Jongyoon Baek \\
+& Yujin Yeo \\
+& Woojin Jung \\
+& Jinsu Hong \\[1ex]
 \textbf{Course Title:}  & General Physics I \\
-\textbf{Instructor:}    & Dr. Professor Name \\
-\textbf{Department:}    & Department of Physics, University Name
+\textbf{Instructor:}    & Dr. Deniz Olgu Devecioğlu \\
+\textbf{Department:}    & School of Undergraduate Studies, DGIST
 \end{tabular}
 }
 \date{\today}
@@ -197,6 +196,10 @@ $\boldsymbol{\omega}\times\mathbf{L}$:
 Since $\mathbf{L}=(I_1\omega_1, I_2\omega_2, I_3\omega_3)$ in the principal
 basis, writing Eq.~\eqref{eq:rotframe} component by component gives the
 \textbf{torque-free Euler equations}:
+Explicitly, the $\mathbf{r}_1$-component reads
+$I_1\dot\omega_1 + \omega_2(I_3\omega_3) - \omega_3(I_2\omega_2)
+= I_1\dot\omega_1 - (I_2-I_3)\omega_2\omega_3 = 0$,
+and similarly for the other two components, yielding:
 \begin{equation}\label{eq:euler}
 \boxed{\;
 I_1\dot{\omega}_1 = (I_2 - I_3)\,\omega_2\omega_3, \quad
